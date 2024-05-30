@@ -1,6 +1,5 @@
 package Main;
 import java.util.Scanner;
-
 import DB.CustomersDB;
 import DB.PostOfficesDB;
 import System.*;
@@ -92,41 +91,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println("_____________________________Welcome to Post Office System_____________________________");
-        System.out.println("");
-        Scanner scanner = new Scanner(System.in);
-        Validator validator = new Validator();
-        Authenticator authenticator = new Authenticator();
-
-        AdminUI adminUI = new AdminUI(scanner, validator, authenticator);
-        CustomerUI customerUI = new CustomerUI(scanner, validator, authenticator);
-        PostManUI postmanUI = new PostManUI(scanner, authenticator);
-
-        String choice = "";
-        while (!choice.equals("0")) {
-            System.out.println("1. Login as Admin");
-            System.out.println("2. Login as Postman");
-            System.out.println("3. Customer Menu");
-            System.out.println("0. Exit");
-            System.out.print("Enter your choice : ");
-            choice = scanner.nextLine();
-            switch (choice) {
-                case "1":
-                    adminUI.displayAdminMenu();
-                    break;
-                case "2":
-                    postmanUI.displayPostmanMenu();
-                    break;
-                case "3":
-                    customerUI.displayCustomerMenu();
-                    break;
-                case "0":
-                    break;
-                default:
-                    System.out.println("Invalid choice!\n");
-            }
-        }
-
-        System.out.println("\n_____________________________Thank you for using Post Office System_____________________________\n");
+        UI ui = new UI();
+        ui.display();
     }
 }
