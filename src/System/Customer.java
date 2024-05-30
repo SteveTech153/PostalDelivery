@@ -21,6 +21,7 @@ public class Customer extends User implements CustomerPostsActions, CustomerPers
     public PostBox getPostBox(){
         return postBox;
     }
+
     @Override
     public String doPost(PostCard post){
         PostalManager manager = PostOffice.getManagerOfACity(post.getSenderCity());
