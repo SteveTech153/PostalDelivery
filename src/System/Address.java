@@ -23,6 +23,9 @@ public class Address {
     public String getPincode(){
         return pincode;
     }
+    public void setCity(String city){
+        this.city = city;
+    }
 
     @Override
     public boolean equals(Object obj) {

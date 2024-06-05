@@ -1,9 +1,14 @@
-package System;
+package System.PostOffice;
 import DB.CustomersDB;
 import DB.PostOfficesDB;
+import System.Customer.Customer;
+import System.PostalManager.PostalManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import System.*;
+import System.PostMan.*;
 
 public class PostOffice implements PostOfficePostsActions, PostOfficeCustomerActions, PostOfficeManagerActions, PostOfficePostManActions {
     private static int incrementIndex = 0;
@@ -30,9 +35,10 @@ public class PostOffice implements PostOfficePostsActions, PostOfficeCustomerAct
     @Override
     public String addPost(PostCard post){
         int cityId = PostOfficesDB.getIndexOfCity(post.getReceiverCity());
-        if(Integer.toString(cityId).length()==1){
+        int lengthOfCityId = Integer.toString(cityId).length();
+        if(lengthOfCityId==1){
             post.setPId("00"+cityId+ (++incrementIndex));
-        }else if(Integer.toString(cityId).length()==2){
+        }else if(lengthOfCityId==2){
             post.setPId("0"+cityId+ (++incrementIndex));
         }else{
             post.setPId(cityId+""+(++incrementIndex));
@@ -86,18 +92,6 @@ public class PostOffice implements PostOfficePostsActions, PostOfficeCustomerAct
     @Override
     public Customer getCustomerById(int id){
         return CustomersDB.getCustomerById(id);
-    }
-
-    public static PostalManager getManagerOfACity(String city){
-        if(PostOfficesDB.getCities().contains(city))
-            return PostOfficesDB.getAPostOfficeOfACity(city).getManager();
-        return null;
-    }
-    public static PostOffice getPostOfficeOfACity(String city){
-        if(PostOfficesDB.getCities().contains(city)){
-            return PostOfficesDB.getAPostOfficeOfACity(city);
-        }
-        return null;
     }
 
 }

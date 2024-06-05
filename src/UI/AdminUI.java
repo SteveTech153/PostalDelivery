@@ -1,8 +1,9 @@
 package UI;
-import System.Admin;
+import System.Admin.Admin;
 import Util.Authenticator;
 import Util.Validator;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminUI {
@@ -10,10 +11,10 @@ public class AdminUI {
     private Validator validator;
     private Authenticator authenticator;
 
-    public AdminUI(Scanner scanner, Validator validator, Authenticator authenticator) {
-        this.scanner = scanner;
-        this.validator = validator;
-        this.authenticator = authenticator;
+    public AdminUI() {
+        this.scanner = new Scanner(System.in);
+        this.validator = new Validator();
+        this.authenticator = new Authenticator();
     }
 
     public void displayAdminMenu() {
@@ -29,7 +30,7 @@ public class AdminUI {
             }
             System.out.print("Enter Admin password : ");
             String password = scanner.nextLine();
-            admin = authenticator.authenticateAdmin(name, password);
+            admin = authenticator.authenticateAndGetAdmin(name, password);
             if (admin == null) {
                 System.out.println("Invalid password");
                 System.out.println("Do you want to try again? (y/n)");
@@ -63,6 +64,15 @@ public class AdminUI {
                     System.out.println();
                     break;
                 case "2":
+                    List<String> cities = admin.getAllCities();
+                    if (cities.size() == 0) {
+                        System.out.println("No cities to remove!");
+                        break;
+                    }
+                    System.out.println("Cities available : ");
+                    for (String c : cities) {
+                        System.out.println(c);
+                    }
                     System.out.print("Enter city name : ");
                     String cityToRemove = scanner.nextLine();
                     if (admin.removePostOffice(cityToRemove)) {

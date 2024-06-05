@@ -6,21 +6,15 @@ import Util.Validator;
 import java.util.Scanner;
 
 public class UI {
-    private Scanner scanner;
-    private Validator validator;
-    private Authenticator authenticator;
+    Scanner scanner;
     private AdminUI adminUI;
     private CustomerUI customerUI;
     private PostManUI postmanUI;
-
     public UI() {
         this.scanner = new Scanner(System.in);
-        this.validator = new Validator();
-        this.authenticator = new Authenticator();
-
-        this.adminUI = new AdminUI(scanner, validator, authenticator);
-        this.customerUI = new CustomerUI(scanner, validator, authenticator);
-        this.postmanUI = new PostManUI(scanner, authenticator);
+        this.adminUI = new AdminUI();
+        this.customerUI = new CustomerUI();
+        this.postmanUI = new PostManUI();
     }
 
     public void display() {

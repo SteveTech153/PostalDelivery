@@ -23,6 +23,6 @@ public class Validator {
         return pincode.matches("[0-9]+") && pincode.length() == 6;
     }
     public boolean validateAddress(String address){
-        return address.length() >= 10 && address.length() <= 100 && address.matches("[a-zA-Z0-9, -]+");
+        return address.length() >= 3 && address.length() <= 100 && address.matches("[a-zA-Z0-9, -]+");
     }
 }

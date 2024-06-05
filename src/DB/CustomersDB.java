@@ -1,5 +1,6 @@
 package DB;
-import System.*;
+import System.Customer.Customer;
+
 import java.util.HashMap;
 
 public class CustomersDB {
@@ -17,7 +18,6 @@ public class CustomersDB {
         }else {
             return false;
         }
-
     }
     public static boolean removeCustomer(String aadharNumber){
         if(customersAadharMap.containsKey(aadharNumber)){

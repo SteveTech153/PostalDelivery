@@ -1,12 +1,13 @@
-package System;
+package System.PostalManager;
 import DB.PostOfficesDB;
-
+import System.Customer.Customer;
 import java.util.List;
+import System.*;
+import System.PostOffice.PostOffice;
 
-public class PostalManager extends User implements PostalManagerCustomerActions, PostalManagerPostsActions {
+public class PostalManager extends User implements PostalManagerCustomerActions, PostalManagerPostsActions, PostalManagerCustomerService, PostalManagerPostmanService {
     private static String postalManagerPassword = "Postalmanager@123";
     private String city;
-
     public PostalManager(String name, String password, String city) throws IllegalAccessException {
         super(name);
         if (!postalManagerPassword.equals(password)) {
@@ -24,6 +25,9 @@ public class PostalManager extends User implements PostalManagerCustomerActions,
     public String doPost(PostCard post) {
         PostOffice postOffice = PostOfficesDB.getAPostOfficeOfACity(post.getReceiverCity());
         if (postOffice != null) {
+            if(post.getSenderAddress().equals(post.getReceiverAddress())){
+                return "Sender and receiver address can't be same!";
+            }
             return "Your post will be delivered ASAP. Here is your pId " + postOffice.addPost(post);
         }
         return "Post office of your requested city is not available!";
@@ -37,7 +41,7 @@ public class PostalManager extends User implements PostalManagerCustomerActions,
                 return "Post with pId " + pId + " is not available!";
             }
             if (!destinationCity.equals(city)) {
-                PostalManager manager = PostOffice.getManagerOfACity(destinationCity);
+                PostalManager manager = PostOfficesDB.getManagerOfACity(destinationCity);
                 if (manager != null) {
                     return "Status of your post : " + manager.checkStatusOfAPost(pId);
                 }
@@ -63,6 +67,7 @@ public class PostalManager extends User implements PostalManagerCustomerActions,
 
     @Override
     public boolean addACustomer(String name, Address address, int id) {
+        address.setCity(this.city);
         NameAddressPair customerDetails = new NameAddressPair(name, address);
         PostOffice postOffice = PostOfficesDB.getAPostOfficeOfACity(city);
         if (postOffice != null) {

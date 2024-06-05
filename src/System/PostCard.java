@@ -17,6 +17,12 @@ public class PostCard {
     public String getPId(){
         return pId;
     }
+    public Address getSenderAddress(){
+        return from;
+    }
+    public Address getRecieverAddress(){
+        return to;
+    }
     public String getSenderCity(){
         return from.getCity();
     }

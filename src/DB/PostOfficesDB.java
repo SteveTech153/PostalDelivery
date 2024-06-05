@@ -3,7 +3,10 @@ package DB;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import System.*;
+
+import System.PostMan.PostMan;
+import System.PostOffice.PostOffice;
+import System.PostalManager.PostalManager;
 
 public class PostOfficesDB {
     private static List<String> cities = new ArrayList<>();
@@ -48,6 +51,17 @@ public class PostOfficesDB {
     }
     public static int getIndexOfCity(String city){
         return cities.indexOf(city);
+    }
+    public static PostalManager getManagerOfACity(String city){
+        if(PostOfficesDB.getCities().contains(city))
+            return PostOfficesDB.getAPostOfficeOfACity(city).getManager();
+        return null;
+    }
+    public static PostOffice getPostOfficeOfACity(String city){
+        if(PostOfficesDB.getCities().contains(city)){
+            return PostOfficesDB.getAPostOfficeOfACity(city);
+        }
+        return null;
     }
 
 }

@@ -1,16 +1,19 @@
-package System;
-
+package System.Customer;
+import System.PostalManager.PostalManagerCustomerService;
+import System.*;
 public class Customer extends User implements CustomerPostsActions, CustomerPersonalDetailsActions {
     private static int indexIncrement = 0;
-    private int id;
+    private final int id;
     private Address address;
-    private String aadharNumber;
+    private final String aadharNumber;
     private final PostBox postBox;
-    public Customer(String name, String aadharNumber){
+    private final PostalManagerCustomerService postalManagerService;
+    public Customer(String name, String aadharNumber, PostalManagerCustomerService postalManagerService){
         super(name);
         this.id = ++indexIncrement;
         this.postBox = new PostBox();
         this.aadharNumber = aadharNumber;
+        this.postalManagerService = postalManagerService;
     }
     public String getAadharNumber(){
         return aadharNumber;
@@ -24,27 +27,24 @@ public class Customer extends User implements CustomerPostsActions, CustomerPers
 
     @Override
     public String doPost(PostCard post){
-        PostalManager manager = PostOffice.getManagerOfACity(post.getSenderCity());
         String message = "Your requested city is not available";
-        if(manager!=null) {
-            message = manager.doPost(post);
+        if(postalManagerService!=null) {
+            message = postalManagerService.doPost(post);
         }
         return message;
     }
     @Override
     public String checkStatusOfAPost(String pId){
-        PostalManager manager = PostOffice.getManagerOfACity(this.address.getCity());
-        if(manager!=null){
-            return manager.checkStatusOfAPost(pId);
+        if(postalManagerService!=null){
+            return postalManagerService.checkStatusOfAPost(pId);
         }
         return "Post office of your requested city is not available!";
     }
     @Override
     public boolean registerAddress(String name, Address address, int id){
-        PostalManager manager = PostOffice.getManagerOfACity(address.getCity());
-        if(manager!=null){
+        if(postalManagerService!=null){
             this.address = address;
-            return manager.addACustomer(name, address, id);
+            return postalManagerService.addACustomer(name, address, id);
         }
         return false;
     }
