@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PostalManager extends User implements PostalManagerCustomerAssistance, PostalManagerPostmanAssistance, PostalManagerCustomerActions, PostalManagerPostsActions {
     private static String postalManagerPassword = "LfI+54Rw0CjvlghNtVkfwwbMpZPCMldkiFIyRwiyAXU=";
-    private String city;
+    private final String city;
     private final PasswordService passwordService;
     private final PostalManagerService service;
     public PostalManager(String name, String password, String city) throws IllegalAccessException, NoSuchAlgorithmException {

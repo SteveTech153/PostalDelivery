@@ -5,7 +5,6 @@ import com.example.postaldelivery.system.actions.PostalManagerPostsActions;
 import com.example.postaldelivery.system.entities.core.PostOffice;
 import com.example.postaldelivery.system.entities.core.PostalManager;
 import com.example.postaldelivery.system.entities.support.PostCard;
-
 import java.util.List;
 
 public class PostalManagerPostsService implements PostalManagerPostsActions {

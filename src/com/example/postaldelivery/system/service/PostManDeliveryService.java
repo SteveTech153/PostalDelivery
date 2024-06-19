@@ -26,5 +26,4 @@ public class PostManDeliveryService implements PostManDeliveryActions {
         }
         return "Deliveries failed!";
     }
-
 }

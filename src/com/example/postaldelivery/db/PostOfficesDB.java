@@ -52,6 +52,7 @@ public class PostOfficesDB {
     public static int getIndexOfCity(String city){
         return cities.indexOf(city);
     }
+
     public static PostalManager getManagerOfACity(String city){
         if(PostOfficesDB.getCities().contains(city))
             return PostOfficesDB.getAPostOfficeOfACity(city).getManager();

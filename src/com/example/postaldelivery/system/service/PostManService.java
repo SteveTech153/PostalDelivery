@@ -1,5 +1,4 @@
 package com.example.postaldelivery.system.service;
-
 import com.example.postaldelivery.system.actions.PostManDeliveryActions;
 import com.example.postaldelivery.system.actions.PostManPostsActions;
 import com.example.postaldelivery.system.assistance.PostalManagerPostmanAssistance;

@@ -32,7 +32,8 @@ public class CustomerUI {
             choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    login();
+                    if(!login())
+                        break;
                     String customerChoice = "";
                     while (!customerChoice.equals("0")) {
                         System.out.println("1. Send a Post Card");
@@ -175,7 +176,7 @@ public class CustomerUI {
         }
         System.out.println();
     }
-    public void login(){
+    public boolean login(){
         System.out.println("Please enter your aadhar number : ");
         String aadharNumber = scanner.nextLine();
         while (!validator.validateAadharNumber(aadharNumber)) {
@@ -186,8 +187,9 @@ public class CustomerUI {
         customer = authenticator.authenticateAndGetCustomer( aadharNumber);
         if(customer==null){
             System.out.println("Invalid Aadhar!");
-            return;
+            return false;
         }
+        return true;
     }
     public void register(){
         List<String> cities = PostOfficesDB.getCities();

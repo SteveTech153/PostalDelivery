@@ -6,4 +6,4 @@ public class Main {
         UI ui = new UI();
         ui.display();
     }
-} 
+}

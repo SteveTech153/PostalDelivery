@@ -15,44 +15,66 @@ public class PostOffice implements PostOfficeCustomerActions, PostOfficeManagerA
     private static int incrementIndex = 0;
     private final String name;
     private final HashMap<Integer, PostCard> posts;
-    private HashMap<String, String> statusOfDelivery;
-    private List<NameAddressPair> customersDetails;
-    private HashMap<NameAddressPair, Integer> customersNameAddressPairAndIdMap;
+    private final HashMap<String, String> statusOfDelivery;
+    private final List<NameAddressPair> customersDetails;
+    private final HashMap<NameAddressPair, Integer> customersNameAddressPairAndIdMap;
     private PostalManager manager;
     private PostMan postMan;
     private final PostOfficeService service;
 
     public PostOffice(String name){
         this.name = name;
-        this.manager = null;
         this.posts = new HashMap<>();
         this.statusOfDelivery = new HashMap<>();
         this.customersDetails = new ArrayList<>();
         this.customersNameAddressPairAndIdMap = new HashMap<>();
         this.service = new PostOfficeService(this);
     }
-    public HashMap<Integer, PostCard> getPosts(){return posts;}
+    public HashMap<Integer, PostCard> getPosts(){
+        return posts;
+    }
     public void setIncrementIndex(int newIncrementIndexValue){
         incrementIndex = newIncrementIndexValue;
     }
-    public int getIncrementIndex() {return incrementIndex;}
+    public int getIncrementIndex() {
+        return incrementIndex;
+    }
     public List<PostCard> getAllPosts(){
         return new ArrayList<>(posts.values());
     }
-    public void setStatusOfDelivery(String pId, String status){this.statusOfDelivery.put(pId, status);}
-    public HashMap<String, String> getStatusOfDelivery(){ return this.statusOfDelivery; }
-    public HashMap<NameAddressPair, Integer> getCustomersNameAddressPairAndIdMap() { return this.customersNameAddressPairAndIdMap; }
-    public List<NameAddressPair> getCustomersDetails() { return this.customersDetails; }
-    public void assignManager(PostalManager manager){this.manager = manager;}
-    public void assignPostMan(PostMan postMan){this.postMan = postMan;}
-    public PostalManager getManager(){return manager;}
-    public PostMan getPostMan(){return postMan;}
-    public int getIdOfACustomer(NameAddressPair nameAddressPair){return customersNameAddressPairAndIdMap.get(nameAddressPair);}
-    public String addPost(PostCard post){return service.addPost(post);}
+    public void setStatusOfDelivery(String pId, String status){
+        this.statusOfDelivery.put(pId, status);
+    }
+    public HashMap<String, String> getStatusOfDelivery(){
+        return this.statusOfDelivery;
+    }
+    public HashMap<NameAddressPair, Integer> getCustomersNameAddressPairAndIdMap() {
+        return this.customersNameAddressPairAndIdMap;
+    }
+    public List<NameAddressPair> getCustomersDetails() {
+        return this.customersDetails;
+    }
+    public void assignManager(PostalManager manager){
+        this.manager = manager;
+    }
+    public void assignPostMan(PostMan postMan){
+        this.postMan = postMan;
+    }
+    public PostalManager getManager(){
+        return manager;
+    }
+    public PostMan getPostMan(){
+        return postMan;
+    }
+    public int getIdOfACustomer(NameAddressPair nameAddressPair){
+        return customersNameAddressPairAndIdMap.get(nameAddressPair);
+    }
     public String getStatusOfADelivery(String pId){
         return statusOfDelivery.getOrDefault(pId, "Not available!");
     }
-    public void addInCustomersNameAddressPairAndIdMap(NameAddressPair nameAddressPair, int id){customersNameAddressPairAndIdMap.put(nameAddressPair, id);}
+    public void addInCustomersNameAddressPairAndIdMap(NameAddressPair nameAddressPair, int id){
+        customersNameAddressPairAndIdMap.put(nameAddressPair, id);
+    }
     public void setStatusOfADelivery(String pId, String status){
         if(statusOfDelivery.containsKey(pId)){
             statusOfDelivery.put(pId, status);
@@ -60,6 +82,9 @@ public class PostOffice implements PostOfficeCustomerActions, PostOfficeManagerA
     }
 
 
+    public String addPost(PostCard post){
+        return service.addPost(post);
+    }
     public boolean addCustomer(NameAddressPair customerDetails, int id){
         return service.addCustomer(customerDetails, id);
     }

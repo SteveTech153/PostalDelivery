@@ -43,6 +43,6 @@ public class UI {
             }
         }
 
-        System.out.println("\n_____________________________Thank you for using Post Office System_____________________________\n");
+        System.out.println("\n_________________________Thank you for using Post Office System_________________________\n");
     }
 }

@@ -29,5 +29,4 @@ public class CustomerService {
     public boolean registerAddress(String name, Address address, int id) {
         return customerPersonalDetailsService.registerAddress(name, address, id);
     }
-
 }
